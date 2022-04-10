@@ -1,22 +1,10 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
 
-const LINKING_ERROR =
-  `The package 'react-native-new-relic-module' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo managed workflow\n';
-
-const NewRelicModule = NativeModules.NewRelicModule
-  ? NativeModules.NewRelicModule
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
-
-export function multiply(a: number, b: number): Promise<number> {
-  return NewRelicModule.multiply(a, b);
+interface NewRelicModuleInterface {
+  setAttribute: (key: string, value: string) => void;
 }
+
+const NewRelicModule = NativeModules.NewRelicModule as NewRelicModuleInterface;
+
+export { NewRelicModule };
+export default NewRelicModule;

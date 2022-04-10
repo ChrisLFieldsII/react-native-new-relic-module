@@ -1,18 +1,17 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-new-relic-module';
+import { StyleSheet, View, Button } from 'react-native';
+import { NewRelicModule } from 'react-native-new-relic-module';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button
+        title="Set Attribute"
+        onPress={() => {
+          NewRelicModule.setAttribute('test', 'test');
+        }}
+      />
     </View>
   );
 }

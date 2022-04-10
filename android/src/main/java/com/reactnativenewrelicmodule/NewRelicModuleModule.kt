@@ -1,9 +1,11 @@
 package com.reactnativenewrelicmodule
 
+import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
+import com.newrelic.agent.android.NewRelic
 
 class NewRelicModuleModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -11,14 +13,10 @@ class NewRelicModuleModule(reactContext: ReactApplicationContext) : ReactContext
         return "NewRelicModule"
     }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-    
-      promise.resolve(a * b)
-    
-    }
+    fun setAttribute(key: String, value: String) {
+      Log.d("NR", "Setting $key to $value")
 
-    
+      NewRelic.setAttribute(key, value)
+    }
 }

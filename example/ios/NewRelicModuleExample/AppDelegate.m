@@ -10,6 +10,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <NewRelic/NewRelic.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -33,9 +34,10 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  #ifdef FB_SONARKIT_ENABLED
-    InitializeFlipper(application);
-  #endif
+  [NewRelic startWithApplicationToken:@"INSERT_TOKEN_HERE"];
+//  #ifdef FB_SONARKIT_ENABLED
+//    InitializeFlipper(application);
+//  #endif
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"NewRelicModuleExample"
