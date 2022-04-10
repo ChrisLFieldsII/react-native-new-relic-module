@@ -1,6 +1,6 @@
 {
   "name": "react-native-new-relic-module",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Use New Relic in React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
